@@ -7,16 +7,16 @@
 // Testing Module: 
 // 
 // Authors: Will Lacey
-// Date Created: 
+// Date Created: 11/08/2019
 //
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module RegsMux_tb
+module RegsMux_tb;
+	reg RegDst;				// Selector For wWich Write Register Location
 	reg [4:0] rt;			// First Potential Write Register Location
 	reg [4:0] rd;			// Second Potential Write Register Location
-	reg RegDst;				// Selector For wWich Write Register Location
 	wire [4:0] writeReg;	// Calculated Write Register Location
 
 	initial
