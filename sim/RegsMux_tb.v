@@ -4,7 +4,7 @@
 // Description: Test Bench for RegsMux Module
 // 
 // Dependencies: 
-// Test Bench: 
+// Testing Module: 
 // 
 // Authors: Will Lacey
 // Date Created: 
