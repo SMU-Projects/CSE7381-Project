@@ -19,6 +19,9 @@ module RegsMux_tb;
 	reg [4:0] rd;			// Second Potential Write Register Location
 	wire [4:0] writeReg;	// Calculated Write Register Location
 
+	RegsMux regsMux(RegDst, rt, rd, writeReg);
+
+
 	initial
 	begin
 	   rt = 5'b00000;  // 0, these values will distinguish registers
