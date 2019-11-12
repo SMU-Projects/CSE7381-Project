@@ -17,8 +17,8 @@ module Register_tb;
 
 	reg clk;					// Clock Signal
 	reg [31:0] in;				// Input Data
-    reg regWrite;				// Write Signal
-    wire [31:0] out;			// Output Data
+	reg regWrite;				// Write Signal
+	wire [31:0] out;			// Output Data
 
 	Register register(clk, in, regWrite, out);
 
