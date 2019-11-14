@@ -23,9 +23,9 @@ module Mux_tb;
 
 	initial
 	begin
-	   in0 = 5'b00000;  // 0, these values will distinguish registers
-	   in1 = 5'b11111;  // 31
-	   sel = 0;
+		in0 = 5'b00000;  // 0, these values will distinguish registers
+		in1 = 5'b11111;  // 31
+		sel = 0;
 	end
 
 	initial 
