@@ -22,15 +22,17 @@ module Register(clk, in, regWrite, out);
 
     reg [31:0] data;			// Register reserved for holding data
     reg [31:0] out;		
-    
+
     always @(posedge clk)       // Only access register when clock is high
     begin
-		if (regWrite)			// If regWrite, set register data equal to input
-		begin
-    		data <= in;
-    		out <= in;
-    	end
-    	else					// Else, output saved register data
-    		out <= data;
+        if (regWrite)			// If regWrite, set register data equal to input
+        begin
+            data <= in;
+            out <= in;
+        end
+        else					// Else, output saved register data
+        begin   
+            out <= data;
+        end
     end
 endmodule
