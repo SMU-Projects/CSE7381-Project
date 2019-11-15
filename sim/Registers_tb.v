@@ -15,9 +15,9 @@
 
 module Registers_tb;
 
-	reg clk;  // clock signal 
-	reg regWrite;  // signal to write to the write register
-	reg [4:0] writeAddress;  // write address for register, location determined by the register MUX5
+    reg clk;  // clock signal 
+    reg regWrite;  // signal to write to the write register
+    reg [4:0] writeAddress;  // write address for register, location determined by the register MUX5
     reg [4:0] readAddress1;  // first read address for register
     reg [4:0] readAddress2;  // second read address for register
     reg [31:0] writeData;  // write data for register
