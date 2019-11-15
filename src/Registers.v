@@ -15,19 +15,19 @@
 
 module Registers(clk, regWrite, writeAddress, readAddress1, readAddress2, writeData, readData1, readData2);
 
-    input clk;                          
-    input regWrite;                   
-    input [4:0] writeAddress;
-    input [4:0] readAddress1;
-    input [4:0] readAddress2;
-    input [31:0] writeData;
-    output [31:0] readData1;
-    output [31:0] readData2;
+    input clk;  // 
+    input regWrite;  //
+    input [4:0] writeAddress;  //
+    input [4:0] readAddress1;  //
+    input [4:0] readAddress2;  //
+    input [31:0] writeData;  //
+    output [31:0] readData1;  //
+    output [31:0] readData2;  //
 
     reg [31:0] readData1;
     reg [31:0] readData2;
 
-    reg [31:0] registers [31:0];
+    reg [31:0] registers [31:0];  //
 
     initial begin
         registers[0] <= 32'h00000000;
