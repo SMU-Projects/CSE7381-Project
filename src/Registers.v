@@ -66,7 +66,6 @@ module Registers(clk, regWrite, writeAddress, readAddress1, readAddress2, writeD
 
     always @(posedge clk)
     begin
-
         if (regWrite == 1) 
         begin
             registers[writeAddress] <= writeData;
@@ -79,14 +78,5 @@ module Registers(clk, regWrite, writeAddress, readAddress1, readAddress2, writeD
         readData2 <= registers[readAddress2];
     end
 endmodule
-
-
-
-
-
-
-
-
-
 
 
