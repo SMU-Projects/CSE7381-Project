@@ -1,19 +1,14 @@
 //////////////////////////////////////////////////////////////////////////////////
-// Company: 
-// Engineer: 
-// 
-// Create Date: 11/06/2019 06:01:28 PM
-// Design Name: 
+//
 // Module Name: SignExt_tb
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
+// Description: Test Bench for SignExt Module
 // 
 // Dependencies: 
+// Testing Module: SignExt
 // 
-// Revision:
-// Revision 0.01 - File Created
+// Authors: Mike Xiao
+// Date Created: 11/06/2019
+//
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////

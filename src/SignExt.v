@@ -1,15 +1,15 @@
 //////////////////////////////////////////////////////////////////////////////////
-
+// 
 // Module Name: SignExt
-// Project Name: 
-// Target Devices: 
-// Tool Versions: 
-// Description: 
+// Description: Extends the sign for the Immediate in an I-Instruction; Extends
+//					a 16 bit value to a 32 bit
 // 
 // Dependencies: 
+// Test Bench: SignExt_tb
 // 
-// Revision:
-// Revision 0.01 - File Created
+// Authors: Mike Xiao
+// Date Created: 11/06/2019
+//
 // Additional Comments:
 // 
 //////////////////////////////////////////////////////////////////////////////////
