@@ -14,10 +14,10 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module Mux5 (sel, in0, in1, out);
-	input sel;			// Selector For Which Output
-	input [4:0] in0;	// First Potential Output
-	input [4:0] in1;	// Second Potential Output
-	output [4:0] out;	// Calculated Output
+	input sel;  // Selector For Which Output
+	input [4:0] in0;  // First Potential Output
+	input [4:0] in1;  // Second Potential Output
+	output [4:0] out;  // Calculated Output
 
 	reg [4:0] out;
 
@@ -26,7 +26,7 @@ module Mux5 (sel, in0, in1, out);
 		case (sel)
 			0: out <= in0;
 			1: out <= in1;			
-			default: out <= 0; 	// This should never happen
+			default: out <= 0;  // This should never happen
 		endcase
 	end
 endmodule
