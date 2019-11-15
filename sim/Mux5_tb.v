@@ -14,10 +14,10 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module Mux_tb;
-	reg sel;			// Selector For Which Output
-	reg [4:0] in0;		// First Potential Output
-	reg [4:0] in1;		// Second Potential Output
-	wire [4:0] out;		// Calculated Output
+	reg sel;  // Selector For Which Output
+	reg [4:0] in0;  // First Potential Output
+	reg [4:0] in1;  // Second Potential Output
+	wire [4:0] out;  // Calculated Output
 
 	Mux5 mux(sel, in0, in1, out);
 
