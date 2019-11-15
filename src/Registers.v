@@ -15,22 +15,22 @@
 
 module Registers(clk, regWrite, writeAddress, readAddress1, readAddress2, writeData, readData1, readData2);
 
-    input clk;  // 
-    input regWrite;  //
-    input [4:0] writeAddress;  //
-    input [4:0] readAddress1;  //
-    input [4:0] readAddress2;  //
-    input [31:0] writeData;  //
-    output [31:0] readData1;  //
-    output [31:0] readData2;  //
+    input clk;  // clock signal 
+    input regWrite;  // signal to write to the write register
+    input [4:0] writeAddress;  // write address for register, location determined by the register MUX5
+    input [4:0] readAddress1;  // first read address for register
+    input [4:0] readAddress2;  // second read address for register
+    input [31:0] writeData;  // write data for register
+    output [31:0] readData1;  // first read data from register
+    output [31:0] readData2;  // second read data from register
 
     reg [31:0] readData1;
     reg [31:0] readData2;
 
-    reg [31:0] registers [31:0];  //
+    reg [31:0] registers [31:0];  // 32 registers for Registers module 
 
     initial begin
-        registers[0] <= 32'h00000000;
+        registers[0] <= 32'h00000000;  // TODO: condense to for loop 
         registers[1] <= 32'h00000000;
         registers[2] <= 32'h00000000;
         registers[3] <= 32'h00000000;
@@ -64,6 +64,7 @@ module Registers(clk, regWrite, writeAddress, readAddress1, readAddress2, writeD
         registers[31] <= 32'h00000000;
     end
 
+    // write to registers on positive clock edge
     always @(posedge clk)
     begin
         if (regWrite == 1) 
@@ -72,6 +73,7 @@ module Registers(clk, regWrite, writeAddress, readAddress1, readAddress2, writeD
         end
     end
 
+    // output read data on negative clock edge
     always @(negedge clk)
     begin
         readData1 <= registers[readAddress1];

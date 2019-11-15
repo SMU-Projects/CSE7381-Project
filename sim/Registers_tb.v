@@ -15,17 +15,19 @@
 
 module Registers_tb;
 
-	reg clk;
-	reg regWrite; 
-	reg [4:0] writeAddress;
-    reg [4:0] readAddress1;
-    reg [4:0] readAddress2;
-    reg [31:0] writeData;
-    wire [31:0] readData1;
-    wire [31:0] readData2;
+	reg clk;  // clock signal 
+	reg regWrite;  // signal to write to the write register
+	reg [4:0] writeAddress;  // write address for register, location determined by the register MUX5
+    reg [4:0] readAddress1;  // first read address for register
+    reg [4:0] readAddress2;  // second read address for register
+    reg [31:0] writeData;  // write data for register
+    wire [31:0] readData1;  // first read data from register
+    wire [31:0] readData2;  // second read data from register
 
+    // Import Registers Module into testbench
     Registers registers(clk, regWrite, writeAddress, readAddress1, readAddress2, writeData, readData1, readData2);
 
+    // Initialize testbench
     initial
 	begin
 	   clk = 1;
@@ -36,6 +38,7 @@ module Registers_tb;
 	   writeData = 32'hFFFFFFFF;
 	end
 
+	// The following test bench code verifies the functionality of the Registers module
 	initial 
 	begin
 		#1 clk=0; regWrite=1; writeAddress=0; readAddress1=0; readAddress2=0; writeData=32'hAAAAAAAA;
