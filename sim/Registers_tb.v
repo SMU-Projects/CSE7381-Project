@@ -3,7 +3,7 @@
 // Module Name: Registers_tb
 // Description: Test Bench for Registers Module
 // 
-// Dependencies: Register
+// Dependencies: 
 // Testing Module: Registers
 // 
 // Authors: Will Lacey
