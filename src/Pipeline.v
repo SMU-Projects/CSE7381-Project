@@ -15,20 +15,69 @@
 // 
 //////////////////////////////////////////////////////////////////////////////////
 
-module Pipeline (clk, instruction32);
-	input sel;  // Selector For Which Output
-	input [4:0] in0;  // First Potential Output
-	input [4:0] in1;  // Second Potential Output
-	output [4:0] out;  // Calculated Output
+module Pipeline (
+	clk, instruction32, readData1, readData2, extendedImm, 
+	regDst, regWrite, 
+	opcode, rs, rt, rd, shamt, funct, immediate, address
+);
 
-	reg [4:0] out;
+	// MIPS Instruction Decode Outputs
+	input clk;
+	input [31:0] instruction32;
+	output [31:0] readData1;
+	output [31:0] readData2;
+	output [31:0] extendedImm;
 
-	always @(sel or in0 or in1)
-	begin
-		case (sel)
-			0: out <= in0;
-			1: out <= in1;			
-			default: out <= 0;  // This should never happen
-		endcase
-	end
+	// MIPS Instruction Decode Control Signals
+	input regDst;
+	input regWrite;
+
+	// Additional MIPS ID Pipeline output for testing purposes
+	output [5:0] opcode;
+	output [4:0] rs;
+	output [4:0] rt;
+	output [4:0] rd;
+	output [4:0] shamt;
+	output [5:0] funct;
+	output [15:0] immediate;
+	output [25:0] address;
+
+	// Intermediate signals
+	wire [4:0] writeAddress;
+
+	// First, decode 32 bit instruction....
+
+	// R instruction
+	assign opcode = instruction32[31:26];
+	assign rs = instruction32[25:21];
+	assign rt = instruction32[20:16];
+	assign rd = instruction32[15:11];
+	assign shamt = instruction32[10:6];
+	assign funct = instruction32[5:0];
+
+	// I instruction
+	assign immediate = instruction32[15:0];
+
+	// I instruction
+	assign address = instruction32[25:0];
+
+
+	// Now, wire hardware inside of MIPS Pipeline stage...
+	Mux5 mux5 (
+		.sel(regDst), .in0(rs), .in1(rt), .out(writeAddress) 
+	);
+
+	Registers registers(
+		.clk(clk), .regWrite(regWrite), .writeAddress(writeAddress), .readAddress1(rs), 
+		.readAddress2(rt), .writeData(32'hFFFFFFFF), .readData1(readData1), .readData2(readData2)
+	);
+
+	SignExt signExt(
+		.imm(immediate), .extendedImm(extendedImm)
+	);
+
 endmodule
+
+
+
+
