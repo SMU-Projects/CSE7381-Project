@@ -41,15 +41,38 @@ module Registers_tb;
 	// The following test bench code verifies the functionality of the Registers module
 	initial 
 	begin
+		// Write hFFFFFFFF to address 0
 		#1 clk=0; regWrite=1; writeAddress=0; readAddress1=0; readAddress2=0; writeData=32'hAAAAAAAA;
+
+		// Read then write hAAAAAAAA to address 0
+		#1 clk=1; regWrite=1; writeAddress=0; readAddress1=0; readAddress2=0; writeData=32'hAAAAAAAA;
+		#1 clk=0; regWrite=1; writeAddress=0; readAddress1=0; readAddress2=0; writeData=32'hAAAAAAAA;
+
+		// Read then write hBBBBBBBB to address 0, display address 1 as well
+		#1 clk=1; regWrite=1; writeAddress=0; readAddress1=0; readAddress2=1; writeData=32'hBBBBBBBB;
+		#1 clk=0; regWrite=1; writeAddress=0; readAddress1=0; readAddress2=1; writeData=32'hBBBBBBBB;
+		#1 clk=1; regWrite=1; writeAddress=0; readAddress1=0; readAddress2=1; writeData=32'hBBBBBBBB;
+		#1 clk=0; regWrite=1; writeAddress=0; readAddress1=0; readAddress2=1; writeData=32'hBBBBBBBB;
+
+		// Read then write hAAAAAAAA to address 1
 		#1 clk=1; regWrite=1; writeAddress=1; readAddress1=1; readAddress2=1; writeData=32'hAAAAAAAA;
-		#1 clk=0; regWrite=1; writeAddress=2; readAddress1=1; readAddress2=1; writeData=32'h12345678;
+		#1 clk=0; regWrite=1; writeAddress=2; readAddress1=1; readAddress2=1; writeData=32'h12345678; // Write previous value
+
+		// Read then write hBBBBBBBB to address 1
 		#1 clk=1; regWrite=1; writeAddress=2; readAddress1=2; readAddress2=2; writeData=32'hBBBBBBBB;
-		#1 clk=0; regWrite=1; writeAddress=2; readAddress1=2; readAddress2=2; writeData=32'h12345678;
+		#1 clk=0; regWrite=1; writeAddress=2; readAddress1=2; readAddress2=2; writeData=32'h12345678; // Write previous value
+
+		// Display address 2, do not write
 		#1 clk=1; regWrite=0; writeAddress=2; readAddress1=2; readAddress2=2; writeData=32'h12345678;
 		#1 clk=0; regWrite=0; writeAddress=2; readAddress1=2; readAddress2=2; writeData=32'h12345678;
+
+		// Display address 30 and 31, do not write 
 		#1 clk=1; regWrite=0; writeAddress=30; readAddress1=30; readAddress2=31; writeData=32'hFFFFFFFF;
 		#1 clk=0; regWrite=0; writeAddress=30; readAddress1=30; readAddress2=31; writeData=32'hFFFFFFFF;
+
+		// Display address at 0 and 1
+		#1 clk=1;
+		#1 clk=0; regWrite=0; writeAddress=0; readAddress1=0; readAddress2=1; writeData=32'h12345678;
 	end
 
 	initial $monitor($time, " clk=%b regWrite=%b writeAddress=%d readAddress1=%d readAddress2=%d writeData=%h readData1=%h readData2=%h", clk, regWrite, writeAddress, readAddress1, readAddress2, writeData, readData1, readData2);

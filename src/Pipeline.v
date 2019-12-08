@@ -8,7 +8,7 @@
 // Dependencies: SignExt, Mux5, Registers
 // Test Bench: Pipeline_tb
 // 
-// Authors: Will Lacey
+// Authors: Will Lacey, Mike Xiao
 // Date Created: 11/23/2019
 //
 // Additional Comments: 
@@ -64,16 +64,16 @@ module Pipeline (
 
 	// Now, wire hardware inside of MIPS Pipeline stage...
 	Mux5 mux5 (
-		.sel(regDst), .in0(rs), .in1(rt), .out(writeAddress) 
+		.sel(regDst), .in0(instruction32[25:21]), .in1(instruction32[20:16]), .out(writeAddress) 
 	);
 
 	Registers registers(
-		.clk(clk), .regWrite(regWrite), .writeAddress(writeAddress), .readAddress1(rs), 
-		.readAddress2(rt), .writeData(32'hFFFFFFFF), .readData1(readData1), .readData2(readData2)
+		.clk(clk), .regWrite(regWrite), .writeAddress(writeAddress), .readAddress1(instruction32[25:21]), 
+		.readAddress2(instruction32[20:16]), .writeData(32'hFFFFFFFF), .readData1(readData1), .readData2(readData2)
 	);
 
 	SignExt signExt(
-		.imm(immediate), .extendedImm(extendedImm)
+		.imm(instruction32[15:0]), .extendedImm(extendedImm)
 	);
 
 endmodule
