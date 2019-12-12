@@ -3,7 +3,7 @@
 // Module Name: Registers
 // Description: Memory reading and writing module of the MIPS Architecture
 // 
-// Dependencies: Register
+// Dependencies: 
 // Test Bench: Register_tb
 // 
 // Authors: Will Lacey
