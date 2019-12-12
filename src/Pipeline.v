@@ -44,6 +44,7 @@ module Pipeline (
 
 	// Intermediate signals
 	wire [4:0] writeAddress;
+	reg [31:0] writeData = 32'h00000000;
 
 	// First, decode 32 bit instruction....
 
@@ -61,15 +62,20 @@ module Pipeline (
 	// I instruction
 	assign address = instruction32[25:0];
 
+	// Next, track clock cycle with writeData
+	always @(posedge clk or negedge clk)
+	begin
+		writeData <= writeData + 1;
+	end
 
 	// Now, wire hardware inside of MIPS Pipeline stage...
 	Mux5 mux5 (
-		.sel(regDst), .in0(instruction32[25:21]), .in1(instruction32[20:16]), .out(writeAddress) 
+		.sel(regDst), .in0(instruction32[20:16]), .in1(instruction32[15:11]), .out(writeAddress) 
 	);
 
 	Registers registers(
 		.clk(clk), .regWrite(regWrite), .writeAddress(writeAddress), .readAddress1(instruction32[25:21]), 
-		.readAddress2(instruction32[20:16]), .writeData(32'hFFFFFFFF), .readData1(readData1), .readData2(readData2)
+		.readAddress2(instruction32[20:16]), .writeData(writeData), .readData1(readData1), .readData2(readData2)
 	);
 
 	SignExt signExt(

@@ -54,28 +54,31 @@ module Pipeline_tb;
 	// The following test bench code verifies the functionality of the Registers module
 	initial 
 	begin
-		#1 clk=0; instruction32=32'h00000000; regDst=1; regWrite=1;
-		#1 clk=1; instruction32=32'h00000001; regDst=1; regWrite=1;
-		#1 clk=0; instruction32=32'h00000002; regDst=1; regWrite=1;
-		#1 clk=1; instruction32=32'h00000003; regDst=1; regWrite=1;
-		#1 clk=0; instruction32=32'h00000004; regDst=1; regWrite=1;
+		#1 clk=0; instruction32=32'h00000000;
+		#1 clk=1; instruction32=32'h00000001;
+		#1 clk=0; instruction32=32'h00000002; regWrite=0;
+		#1 clk=1; instruction32=32'h00000003;
+		#1 clk=0; instruction32=32'h00000004; regWrite=1;
 
 		// Read address 1 and address 2
-		#1 clk=1; regDst=1; regWrite=0; // Write on positive clock edge, output on negative clock edge
-		#1 instruction32=32'b00000000001000100000000000000000;  
+		#1 clk=1; // Write on positive clock edge, output on negative clock edge
+		#1 clk=0; instruction32=32'b00000000001000100000100000000000;
+
+		// Read address 1 and address 2
+		#1 clk=1; // Write on positive clock edge, output on negative clock edge
 		#1 clk=0; 
 
 		// Read address 1 and address 2
-		#1 clk=1; regDst=1; regWrite=0; // Write on positive clock edge, output on negative clock edge
-		#1 clk=0; instruction32=32'b00000000001000100000000000000000;
+		#1 clk=1; // Write on positive clock edge, output on negative clock edge
+		#1 clk=0; regDst=0; 
 
 		// Read address 1 and address 2
-		#1 clk=1; regDst=1; regWrite=1; // Write on positive clock edge, output on negative clock edge
-		#1 clk=0; instruction32=32'b00000000001000100000000000000000;
+		#1 clk=1; // Write on positive clock edge, output on negative clock edge
+		#1 clk=0; regWrite=0;
 
 		// Read address 1 and address 2
-		#1 clk=1; regDst=1; regWrite=1; // Write on positive clock edge, output on negative clock edge
-		#1 clk=0; instruction32=32'b00000000001000100000000000000000;
+		#1 clk=1; instruction32=32'b00000000000000100001000000000000; // Write on positive clock edge, output on negative clock edge
+		#1 clk=0; 
 
 	end
 
